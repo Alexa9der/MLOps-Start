@@ -181,28 +181,58 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+# Ignore specific system and environment files
+.aws/
+.jupyter/
+.local/
+.motd_shown
+.psql_history
+.sudo_as_admin_successful
+.wget-hsts
 
-# Сгенерированные файлы
+# Ignore Airflow files except DAGs
+airflow/*
+!airflow/dags/
+airflow/dags/*
+!airflow/dags/*.py
+!airflow/dags/*.yaml
+!airflow/dags/*.dag
+
+# Ignore AWS, MLFlow, and scikit-learn data directories
+aws/
+mlflow/
+scikit_learn_data/
+
+# Ignore Miniconda3 directory
+miniconda3/
+
+# Ignore bash history and configuration files
+.bash_history
+.bash_logout
+.bashrc
+.condarc
+.lesshst
+.profile
+
+# Generated files
 *.log
 *.out
 
-# Данные
-data/
+# Data
 *.json
 *.csv
 *.pkl
 
-# Конфиденциальные данные
+# Confidential data
 .env
 
-# Артефакты моделей и большие файлы
+# Model artifacts and large files
 mlflow_artifacts/
 
-# Конда окружения
+# Conda environment
 miniconda3/
 *.conda
 
-# Системные файлы
+# System files
 .DS_Store
 Thumbs.db
-
