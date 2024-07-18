@@ -1,0 +1,25 @@
+Part 1: Installing PSQL.
+
+# Add Postgres to apt index
+sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+# Pull the key from the repository
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+# Update apt index
+sudo apt-get update
+
+# Install Postgres 12
+sudo apt-get -y install postgresql-12
+
+# Raise Postgres
+sudo service postgresql start
+
+# Run script as user postgres
+sudo -u postgres psql
+
+
+Part 2. Creating a database for AirFlow.
+CREATE DATABASE airflow_db;
+CREATE USER airflow_user WITH PASSWORD 'airflow_pass';
+GRANT ALL PRIVILEGES ON DATABASE airflow_db TO airflow_user;

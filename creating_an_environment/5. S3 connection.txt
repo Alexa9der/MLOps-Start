@@ -1,0 +1,37 @@
+S3 connection (from Yandex)
+
+Part 1: Install AWS cli.
+
+# Download awscliv2.zip
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+# Unpack awscliv2.zip
+unzip awscliv2.zip
+
+# Install aws client
+sudo ./aws/install
+
+# Set configuration
+aws configure
+
+
+Part 2. When working with yandexcloud, add a profile to credentials.
+
+# Open credentials file
+nano ~/.aws/credentials
+
+# Add a new airflow profile to the bottom of the file
+[airflow]
+endpoint_url=https://storage.yandexcloud.net
+
+
+Part 3. Add a profile to AirFlow connection.
+{"profile_name":"airflow"}
+
+
+Part 4. Update the time in the system.
+
+For those whose S3Hook will fail with the error "A client error (RequestTimeTooSkewed) occurred when calling the UploadPart operation: The difference between the request time and the current time is too large"
+
+sudo apt install ntpdate
+sudo ntpdate time.nist.gov

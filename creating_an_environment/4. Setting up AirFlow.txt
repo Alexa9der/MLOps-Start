@@ -1,0 +1,34 @@
+Airflow.cfg config settings
+
+Mail
+
+# Host
+smtp_host = smtp.gmail.com
+
+# Your email
+smtp_user = example@gmail.com
+
+# Application password
+smtp_password = yourpassword
+
+# Port (not in the video, don't forget!)
+smtp_port = 587
+
+# Your email again
+smtp_mail_from = example@gmail.com
+
+
+SQL
+
+sql_alchemy_conn = postgresql+psycopg2://airflow_user:airflow_pass@localhost/airflow_db
+
+
+Executor
+
+executor = LocalExecutor
+Loading examples (optional)
+
+load_examples = False
+Default DAG view (optional)
+
+dag_default_view = graph

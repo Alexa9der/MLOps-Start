@@ -1,0 +1,57 @@
+Part 1. Installing miniconda.
+
+# Download miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-py39_23.5.2-0-Linux-x86_64.sh
+
+# Install miniconda
+bash Miniconda3-py39_23.5.2-0-Linux-x86_64.sh
+
+# Apply changes
+source ~/.bashrc
+
+# Disable auto activation of base environment
+conda config --set auto_activate_base false
+
+
+
+Part 2. Creating a virtual environment.
+
+# Create a virtual environment
+conda create -n mlops_env
+
+# Activate virtual environment
+conda activate mlops_env
+
+
+Part 3. Installing the necessary libraries in the virtual environment.
+
+# Install Jupyter
+conda install -c conda-forge notebook
+
+# Install Pandas
+conda install -c conda-forge pandas
+
+# Install sk-learn
+conda install -c conda-forge scikit-learn
+
+# Install PSQL
+conda install -c conda-forge psycopg2
+
+# Create a home directory for AirFlow
+mkdir ~/airflow
+
+export AIRFLOW_HOME=~/airflow
+
+# Install AirFlow
+pip install apache-airflow
+
+# Install Amazon provider for AirFlow
+pip install apache-airflow-providers-amazon
+
+# Install Postgres provider for AirFlow
+pip install apache-airflow-providers-postgres
+
+# Install MLFlow
+pip install mlflow
+
+

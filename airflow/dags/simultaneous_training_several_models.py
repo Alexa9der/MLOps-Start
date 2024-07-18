@@ -22,15 +22,11 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.utils.dates import days_ago
 
 
-# import sys
-# sys.path.append('data/config')
-# from config import  _LOG ,DEFAULT_ARGS, first_ml_dag, FIRST_BUCKET, ROOT_FOLDER, RAW_DATA
-
 
 _LOG = logging.getLogger()
 _LOG.addHandler(logging.StreamHandler())
 
-# Основные параметры DAG
+# Basic DAG parameters
 DEFAULT_ARGS = {
     "owner": "Oleksandr Kanalosh",
     "email": ["oleksandrairflow@gmail.com"],
@@ -40,7 +36,7 @@ DEFAULT_ARGS = {
     "retry_delay": timedelta(minutes=5) 
 }
 
-# Базовые переменные
+# Basic variables
 FIRST_BUCKET = "first-airflou-test"
 ROOT_FOLDER = "First_action"
 RAW_DATA = "First_action/california_housing.pkl"
@@ -129,7 +125,6 @@ def save_results(**kwargs) -> None:
 
     json_byte_object = json.dumps(metrics)
 
-    # Сохранить результат на S3
     date = datetime.now().strftime("%Y%m%d%H")
     
     s3_hook = S3Hook("s3_connection")
@@ -152,18 +147,31 @@ linearly_several_models = DAG(
 )
 
 with linearly_several_models:
+    # Initializing the task to perform initialization steps
+    task_init = PythonOperator(task_id="init", python_callable=init, dag=linearly_several_models, provide_context=True)
     
-    task_init =  PythonOperator(task_id="init", python_callable=init, dag=linearly_several_models, provide_context=True)
+    # Fetching data task
     task_get_data = PythonOperator(task_id="get_data", python_callable=get_data, dag=linearly_several_models, provide_context=True)
+    
+    # Preparing data for model training
     task_prepare_data = PythonOperator(task_id="prepare_data", python_callable=prepare_data, dag=linearly_several_models, provide_context=True)
     
+    # Training Random Forest model
     train_model_rf = PythonOperator(task_id="train_model_rf", python_callable=train_model, dag=linearly_several_models, op_kwargs={"model":"rf"}, provide_context=True)
+    
+    # Training Linear Regression model
     train_model_lr = PythonOperator(task_id="train_model_lr", python_callable=train_model, dag=linearly_several_models, op_kwargs={"model":"lr"}, provide_context=True)
+    
+    # Training Histogram Gradient Boosting model
     train_model_hgb = PythonOperator(task_id="train_model_hgb", python_callable=train_model, dag=linearly_several_models, op_kwargs={"model":"hgb"}, provide_context=True)
     
+    # Saving results after model training
     task_save_results = PythonOperator(task_id="save_results", python_callable=save_results, dag=linearly_several_models, provide_context=True)
 
+# Defining the sequence of tasks in the DAG
 task_init >> task_get_data >> task_prepare_data >> [train_model_rf, train_model_lr, train_model_hgb] >> task_save_results
+
+
 
 
 

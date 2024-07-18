@@ -1,0 +1,47 @@
+Part 1. Install the library.
+
+# Activate virtual environment
+conda activate mlops_env
+
+# Install the package for airflow from the PostgreSQL provider
+pip install apache-airflow-providers-postgres
+
+
+Part 2. Open a Jupiter session.
+# Raise Jupiter (port number - any of your choice)
+jupyter notebook --port=9992
+
+# Copy a line of this type into your browser (do not copy the line from here, copy it from your terminal!)
+http://localhost:9992/tree
+
+
+Part 3. Create a new Jupiter laptop and execute the code below in it.
+import numpy as np
+import pandas as pd
+
+from sklearn.datasets import fetch_california_housing
+from sqlalchemy import create_engine
+
+
+# Get the California housing dataset
+data = fetch_california_housing()
+
+# Combine features and targets into one np.array
+dataset = np.concatenate([data['data'], data['target'].reshape([data['target'].shape[0],1])],axis=1)
+
+# Convert to dataframe.
+dataset = pd.DataFrame(dataset, columns = data['feature_names']+data['target_names'])
+
+# Create a connection to the postgres database. Change yourpass to your password
+engine = create_engine('postgresql://postgres:yourpass@localhost:5432/postgres')
+
+# Save the dataset to the database
+dataset.to_sql('california_housing', engine)
+
+# To check you can do:
+pd.read_sql_query("SELECT * FROM california_housing", engine)
+
+
+Part 4. Create PostgreSQL connection.
+
+In the web version, go to the Admin->Connections tab, click on '+' and in the window that opens, fill in the fields as indicated below, as well as the password for the postgres user.

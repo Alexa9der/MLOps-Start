@@ -1,0 +1,52 @@
+Create a database for MLFlow
+Open the SQL script writing window in the terminal
+
+# Run script as user postgres
+sudo -u postgres psql
+Example (you can use any of your own databases, but it is not advisable to mix them with those already created in the course).
+
+CREATE DATABASE mlflow_db;
+CREATE USER mlflow WITH PASSWORD 'mlflow';
+GRANT ALL PRIVILEGES ON DATABASE mlflow_db TO mlflow;
+GRANT ALL ON SCHEMA public TO mlflow;
+ALTER DATABASE mlflow_db OWNER TO mlflow;
+\q
+
+
+Environment variables for MLFlow?
+
+Open .bashrc in terminal
+
+nano ~/.bashrc
+Add lines to the end of the file
+
+# For those who do NOT use Amazon, enter your own, for example, yandex
+export MLFLOW_S3_ENDPOINT_URL="https://storage.yandexcloud.net"
+
+# Write a connection string for the previously created MLFlow database
+export MLFLOW_TRACKING_URI="postgresql://mlflow:mlflow@localhost:5432/mlflow_db"
+
+Create a bucket on S3?
+Lesson on S3 from the week on AirFlow.
+
+There is no need to create a new service account, you just need to create a new bucket to separate the results of the MLFlow experiments from AirFlow.
+
+Create a bucket button in the upper right corner.
+
+The name of the bucket is at your discretion.
+
+
+Launch MLFlow.
+
+Enter one of two commands in the terminal.
+
+Completely local (preferably used for evaluation purposes only or not at all): both the backend store and the artifact store are your local file system.
+
+mlflow server
+Distributed (a desirable option for the course, simulating a product environment): backend store - a previously created Postgres database, artifact store - a bucket on S3.
+
+
+mlflow server\
+  --backend-store-uri postgresql://mlflow:mlflow@localhost:5432/mlflow_db \
+  --default-artifact-root s3://lizvladi-mlflow-artifacts\
+ --serve-artifacts

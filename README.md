@@ -1,40 +1,37 @@
-# Проект: MLOps Bootcamp
+# Project: MLOps Bootcamp
 
-Этот проект создан в рамках прохождения интенсивного курса по MLOps, цель которого состояла в настройке окружения для машинного обучения и грамотном управлении версиями результатов экспериментов. Проект является частью моего стремления улучшить навыки в области машинного обучения и DevOps.
+This project was created as part of an intensive MLOps bootcamp aimed at setting up a machine learning environment and effectively managing versioned experiment results. The project is a part of my effort to enhance skills in machine learning and DevOps.
 
-## Курс
+## Course
 
-### Описание курса
+### Course Description
 
-Цель курса состояла в том, чтобы овладеть ключевыми инструментами MLOps и научиться создавать и управлять пайплайнами обучения моделей. В течение курса были изучены следующие темы:
+The goal of the course was to master key MLOps tools and learn how to create and manage model training pipelines. Throughout the course, the following topics were covered:
 
-- Введение в MLOps: основные концепции и принципы.
-- Настройка окружения для работы с данными и моделями.
-- Использование Airflow для создания и управления пайплайнами.
-- Обучение нескольких моделей одновременно с помощью Airflow.
-- Использование MLFlow для логирования моделей и метрик.
-- Финальное задание: применение полученных знаний на практике.
+- Introduction to MLOps: fundamental concepts and principles.
+- Setting up the environment for working with data and models.
+- Using Airflow to create and manage pipelines.
+- Training multiple models concurrently using Airflow.
+- Leveraging MLFlow for model and metric logging.
+- Final project: applying the acquired knowledge in practice.
 
-### Использованные технологии
+### Technologies Used
 
-В процессе прохождения курса я ознакомился и использовал следующие технологии и инструменты:
+During the course, I familiarized myself with and utilized the following technologies and tools:
 
-- **Airflow**: для создания и управления пайплайнами обучения моделей.
-- **MLFlow**: для логирования моделей, метрик и экспериментов.
-- **S3**: для хранения и управления данными.
-- **DVC**: для управления версиями данных.
-- **Python**: основной язык программирования для разработки пайплайнов и обработки данных.
+- **Airflow**: for creating and managing model training pipelines.
+- **MLFlow**: for logging models, metrics, and experiments.
+- **S3**: for storing and managing data.
+- **DVC**: for versioning data.
+- **Python**: primary programming language for pipeline development and data processing.
 
-### Дополнительные детали
+### Additional Details
 
-В процессе обучения я успешно реализовал следующие задачи и проектные работы:
+During the learning process, I successfully completed the following tasks and project works:
 
-- **Настройка окружения**: развернул среду для работы с данными и моделями, используя Miniconda для управления зависимостями и настройки Python-окружений.
-- **Работа с данными**: разработал скрипты для загрузки данных из различных источников и их подготовки для обучения моделей.
-- **Разработка пайплайнов**: создал пайплайны обучения моделей с использованием Airflow, включая параллельное обучение нескольких моделей.
-- **Логирование и управление экспериментами**: использовал MLFlow для логирования моделей, параметров и метрик, а также для создания родительских и дочерних экспериментов.
+- **Environment Setup**: deployed an environment for working with data and models, using Miniconda for dependency management and Python environment setup.
+- **Data Handling**: developed scripts to fetch data from various sources and prepare it for model training.
+- **Pipeline Development**: created model training pipelines using Airflow, including parallel training of multiple models.
+- **Experiment Logging and Management**: used MLFlow to log models, parameters, and metrics, and to create parent and child experiments.
 
-## Структура проекта
-
-Проект содержит следующие каталоги и файлы:
 
